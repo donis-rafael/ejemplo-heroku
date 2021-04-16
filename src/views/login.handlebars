@@ -1,0 +1,36 @@
+<section class="container mt-5 col-md-10">
+    <div class="form-wrap">
+
+        <div class="card">
+            <div class="card-body">
+
+                {{#each errors}}
+                <div class="alert alert-dismissible alert-danger">
+                    <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+                    <p>{{text}}</p>
+                </div>
+                {{/each}}
+                <form action="/auth/login" method="POST">
+                    <div class="form-group">
+                        <label for="exampleSelect1" class="putito"><h1>¿Quién Eres?</h1></label>
+                        <hr />
+                        <select class="form-control select-fam" id="selector" name="primoSelecto">
+                            <optgroup>
+                            {{#each primos}}
+                            <option value={{id}}>{{nombre}}</option>
+                            {{/each}}
+                            </optgroup>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        onclick="return confirm('¿Continuar como '+document.getElementById('selector').options[document.getElementById('selector').selectedIndex].text+'?')"
+                        class="btn btn-primary form-control">
+                        Iniciar
+                    </button>
+                </form> 
+            </div>
+        </div>
+            
+                <!--<a href="/sort/harrypotter/disimula/fito" class="btn btn-primary btn-lg form-control"><h1>Duérmete Harry</h1></a>-->
+    </div>
+</section>

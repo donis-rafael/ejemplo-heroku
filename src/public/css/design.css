@@ -1,0 +1,21 @@
+.titulo{
+    font-size: 30px;
+}
+
+.select-fam{
+    font-size: 30px;
+    color: cornflowerblue;
+    font-style: italic;
+    font-variant: small-caps;
+}
+
+.putito{
+    color: cornflowerblue;
+}
+
+optgroup{
+    font-style: italic;
+    font-variant: small-caps;
+    font-size: 30px;
+    color: cornflowerblue;
+}

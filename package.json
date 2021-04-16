@@ -1,0 +1,27 @@
+{
+  "name": "ejemplo_heroku",
+  "version": "1.0.0",
+  "description": "api ejemplo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/",
+    "dev": "nodemon src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donis-rafael/ejemplo-heroku.git"
+  },
+  "author": "Rafael Morales",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "express-validator": "^6.6.1"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6"
+  }
+}
