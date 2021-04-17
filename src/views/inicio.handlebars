@@ -1,1 +1,72 @@
-sí entra
+<section class="container mt-5 col-md-10">
+    <div class="form-wrap">
+
+        <div class="card">
+            <div class="card-body">
+
+                {{#each errors}}
+                <div class="alert alert-dismissible alert-danger">
+                    <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+                    <p>{{text}}</p>
+                </div>
+                {{/each}}
+                <h2>Hola {{usuario}}</h2>
+                <h4>Traducir un Texto</h4>
+                <form action="/using/traducir" method="POST">
+                    <div class="form-group">
+                        <label for="selector">
+                            <h1>¿Qué Idioma quieres Traducir?</h1>
+                        </label>
+                        <hr />
+                        <select class="form-control select-fam" id="selector" name="idioma1Selecto">
+                            <optgroup>
+                                <option value="es">Español</option>
+                                <option value="en">Inglés</option>
+                                <!--<option value="ru">Ruso</option>
+                                <option value="fr">Francés</option>
+                                <option value="de">Alemán</option>
+                                <option value="pt">Protugués</option>
+                                <option value="it">Italiano</option>-->
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selector2">
+                            <h1>¿A Cual Idioma quieres Traducir?</h1>
+                        </label>
+                        <hr />
+                        <select class="form-control select-fam" id="selector2" name="idioma2Selecto">
+                            <optgroup>
+                                <option value="es">Español</option>
+                                <option value="en">Inglés</option>
+                                <!--<option value="ru">Ruso</option>
+                                <option value="fr">Francés</option>
+                                <option value="de">Alemán</option>
+                                <option value="pt">Protugués</option>
+                                <option value="it">Italiano</option>-->
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="texto">Texto a Traducir</label>
+                        <textarea class="form-control" id="texto" name="texto" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">
+                            Traducir
+                        </button>
+                    </div>
+
+                    <input id="user" name="user" type="hidden" value={{usuario}}>
+                </form>
+                {{#if traducido}}
+                <div class="form-group">
+                    <label for="texto">Texto Traducido</label>
+                    <p class="text-info">{{traducido}}</p>
+                </div>
+                {{/if}}
+                <a class="btn btn btn-warning" href="/auth/login">Ver Historial</a>
+            </div>
+        </div>
+    </div>
+</section>

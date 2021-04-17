@@ -15,6 +15,7 @@ controller.registro = (req, res) => {
 controller.registroS = (req, res) => {
     const { user, Password1, Password2 } = req.body;
     let errors = [];
+    let successes = [];
 
     if (!user) {
         errors.push({
@@ -39,8 +40,44 @@ controller.registroS = (req, res) => {
             Password1,
             Password2
         });
+    } else if (Password1 != Password2) {
+        errors.push({
+            text: 'Las contraseñas no coinciden'
+        });
+        res.render('registro', {
+            errors
+        });
     } else {
-        res.redirect('/sort/sorteo?primo=' + primoSelecto + '&pert=0&vec=3&to=0');
+        const endpoint = '/ej-registro';
+        api.post(endpoint, {
+            "id": user,
+            "contra": Password1
+        }).then(resp => {
+            if (resp.data.statusCode == 200) {
+                successes.push({
+                    text: 'Usuario Creado con Exito'
+                });
+                res.render('login', {
+                    successes
+                });
+            } else {
+                errors.push({
+                    text: 'Usuario No Creado'
+                });
+                res.render('registro', {
+                    errors
+                });
+            }
+        }).catch(err => {
+            console.log('err: ' + err);
+            errors.push({
+                text: err
+            });
+            errors.push('Usuario No Creado');
+            res.render('registro', {
+                errors
+            });
+        });
     }
 }
 
@@ -78,7 +115,7 @@ controller.inicioS = (req, res) => {
             "contra": Password1
         }).then(resp => {
             if (resp.data.statusCode == 200) {
-                res.redirect('/using/inicio');
+                res.redirect('/using/inicio?user=' + user + '&txt=');
             } else {
                 errors.push({
                     text: 'Usuario o Contraseña Incorrectos'
@@ -88,7 +125,7 @@ controller.inicioS = (req, res) => {
                 });
             }
         }).catch(err => {
-            console.log('err: '+err);
+            console.log('err: ' + err);
             errors.push({
                 text: err
             });
@@ -101,7 +138,65 @@ controller.inicioS = (req, res) => {
 }
 
 controller.inicio = (req, res) => {
-    res.render('inicio');
+    const { user, txt } = req.query;
+    res.render('inicio', {
+        usuario: user,
+        traducido: txt
+    });
+}
+
+controller.traducir = (req, res) => {
+    const { idioma1Selecto, idioma2Selecto, texto, user } = req.body;
+    let errors = [];
+
+    if (!texto) {
+        errors.push({
+            text: 'Por Favor Ingrese Texto a Traducir'
+        });
+    }
+    if (idioma1Selecto === idioma2Selecto) {
+        errors.push({
+            text: 'Por Favor Seleccione Diferente Idioma a Traducir'
+        });
+    }
+    if (errors.length > 0) {
+        res.render('inicio', {
+            errors,
+            texto,
+            idioma1Selecto,
+            idioma2Selecto
+        });
+    } else {
+        console.log('user: ' + user);
+        const endpoint = '/ej-traducir';//?msg=' + texto + '&leng1=' + idioma1Selecto + '&leng2=' + idioma2Selecto;
+        api.post(endpoint, {
+            "msg": texto,
+            "leng1": idioma1Selecto,
+            "leng2": idioma2Selecto
+        }).then(resp => {
+            const mensajeT = resp.data.body;
+
+            const endpoint2 = '/ej-historial';
+            api.post(endpoint2, {
+                "id": user,
+                "msg1": texto,
+                "msg1": mensajeT
+            }).then(resp => {
+            }).catch(err => {
+                console.log(err);
+                res.render('login', {
+                    err
+                });
+            });
+
+            res.redirect('/using/inicio?user=' + user + '&txt=' + mensajeT);
+        }).catch(err => {
+            console.log(err);
+            res.render('login', {
+                err
+            });
+        });
+    }
 }
 
 
