@@ -145,7 +145,7 @@ controller.inicio = (req, res) => {
     });
 }
 
-controller.traducir = (req, res) => {
+controller.traducir = async (req, res) => {
     const { idioma1Selecto, idioma2Selecto, texto, user } = req.body;
     let errors = [];
 
@@ -169,33 +169,35 @@ controller.traducir = (req, res) => {
     } else {
         console.log('user: ' + user);
         const endpoint = '/ej-traducir';//?msg=' + texto + '&leng1=' + idioma1Selecto + '&leng2=' + idioma2Selecto;
-        api.post(endpoint, {
+        let mensajeT = '';
+        await api.post(endpoint, {
             "msg": texto,
             "leng1": idioma1Selecto,
             "leng2": idioma2Selecto
         }).then(resp => {
-            const mensajeT = resp.data.body;
+            mensajeT = JSON.parse(resp.data.body);
 
-            const endpoint2 = '/ej-historial';
-            api.post(endpoint2, {
-                "id": user,
-                "msg1": texto,
-                "msg1": mensajeT
-            }).then(resp => {
-            }).catch(err => {
-                console.log(err);
-                res.render('login', {
-                    err
-                });
-            });
-
-            res.redirect('/using/inicio?user=' + user + '&txt=' + mensajeT);
         }).catch(err => {
             console.log(err);
             res.render('login', {
                 err
             });
         });
+
+        const endpoint2 = '/ej-historial';
+        await api.post(endpoint2, {
+            "id": user,
+            "msg1": texto,
+            "msg2": mensajeT
+        }).then(resp => {
+            res.redirect('/using/inicio?user=' + user + '&txt=' + mensajeT);
+        }).catch(err => {
+            console.log(err.message);
+            res.render('login', {
+                err
+            });
+        });
+
     }
 }
 

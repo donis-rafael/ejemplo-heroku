@@ -12,21 +12,25 @@ exports.handler = async (event, callback) => {
 
     await readAll(usuario).then(data => {
         index = data.Count + 1;
+        result = 'bueno';
 
-        await add(usuario, msg1, msg2, index).then(data => {
-            result = 'bueno';
-            message = 'success';
-    
-        }).catch((err) => {
-            console.error(err);
-            result = 'malo';
-            message = err;
-        });
     }).catch((err) => {
         console.error(err);
         result = 'malo';
         message = err;
     });
+
+    if (result === 'bueno') {
+        await add(usuario, msg1, msg2, index + '').then(data => {
+            result = 'bueno';
+            message = 'success';
+
+        }).catch((err) => {
+            console.error(err);
+            result = 'malo';
+            message = err;
+        });
+    }
 
     let response = {
         statusCode: 200,
@@ -53,6 +57,8 @@ function add(user, txt1, txt2, index) {
             "traduccionNo": index
         }
     };
+
+    console.log(params);
 
     return document.put(params).promise();
 }
