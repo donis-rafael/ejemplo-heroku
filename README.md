@@ -12,17 +12,14 @@ Framework de desarrollo para el Ejemplo
 ******
 Herramientas AWS
 ------
-* CloudFormation y VPC
-* EC2
+* AWS API Gateway
 * S3
-* Cognito
 * Rekognition
 * Translate
 * AWS Lambda
-* AWS API Gateway
 
 ******
-
+/****////
 ## Url's API Gateway
 URL | Descripción de Uso
 ---|---
@@ -33,7 +30,7 @@ URL | Descripción de Uso
 ## Endpoints de la API Gateway
 Endpoint | Descripción de Uso | Tipo
 ---|---|---
-`Alguna url` |  *Creación de algo* | POST
+`/ej-login` |  *Inicio de Sesión* | GET
 `alguna otra` | *Creación de algo* | GET
 
 ******

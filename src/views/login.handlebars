@@ -10,14 +10,15 @@
                     <p>{{text}}</p>
                 </div>
                 {{/each}}
+                <h3>Inicio de Sesión</h3>
                 <form action="/auth/login" method="POST">
                     <div class="form-group">
-                        <label for="Email">Usuario</label>
-                        <input type="text" class="form-control" id="Email" placeholder="Ingrese Usuario">
+                        <label for="user">Usuario</label>
+                        <input type="text" class="form-control" id="user" name="user" placeholder="Ingrese Usuario">
                     </div>
                     <div class="form-group">
                         <label for="Password1">Contraseña</label>
-                        <input type="password" class="form-control" id="Password1" placeholder="Contraseña">
+                        <input type="password" class="form-control" id="Password1" name="Password1" placeholder="Contraseña">
                     </div>
                     <div class="form-group">
                         <button type="submit"
