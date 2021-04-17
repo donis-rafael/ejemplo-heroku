@@ -26,7 +26,7 @@ Herramientas AWS
 ## Url's API Gateway
 URL | Descripción de Uso
 ---|---
-`Alguna url` |  *Creación de algo*
+`https://tul6nj3s0e.execute-api.us-east-2.amazonaws.com/github-heroku` |  *API Gateway General*
 
 ******
 

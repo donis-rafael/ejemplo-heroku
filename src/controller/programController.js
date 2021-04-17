@@ -1,37 +1,51 @@
 const controller = {};
 const con = require('../config/connection');
 
-const direccion = 'https://g7gnyagxqh.execute-api.us-east-2.amazonaws.com/proyPrimos';
+const direccion = 'https://tul6nj3s0e.execute-api.us-east-2.amazonaws.com/github-heroku';
 const api = con(direccion);
 
 /*controller.fito = (req, res) => {
     res.render('fito');
 }*/
 
-controller.login = (req, res) => {
-    api.get('/primoslogin')
-        .then(resp => {
-            //console.log("*********************************************Esto sale: " + resp.data.body);
-            const json = JSON.parse(resp.data.body);
-            const primosFinded = {
-                primoss: json.map(data => {
-                    return {
-                        id: data.primoId,
-                        nombre: data.nombre
-                    }
-                })
-            }
-            res.render('login', {
-                primos: primosFinded.primoss
-            });
+controller.registro = (req, res) => {
+    res.render('registro');
+}
 
-        }).catch(err => {
+controller.registroS = (req, res) => {
+    const { user, Password1, Password2 } = req.body;
+    let errors = [];
 
-            console.log(err);
-            res.render('login', {
-                err
-            });
+    if (!user) {
+        errors.push({
+            text: 'Por Favor Ingrese Usuario'
         });
+    }
+    if (!Password1) {
+        errors.push({
+            text: 'Por Favor Ingrese Contraseña'
+        });
+    }
+    if (!Password2) {
+        errors.push({
+            text: 'Por Favor Ingrese Confirmación Contraseña'
+        });
+    }
+
+    if (errors.length > 0) {
+        res.render('registro', {
+            errors,
+            user,
+            Password1,
+            Password2
+        });
+    } else {
+        res.redirect('/sort/sorteo?primo=' + primoSelecto + '&pert=0&vec=3&to=0');
+    }
+}
+
+controller.login = (req, res) => {
+    res.render('login');
 }
 
 controller.inicioS = (req, res) => {

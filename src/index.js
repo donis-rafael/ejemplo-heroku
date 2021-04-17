@@ -13,17 +13,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// set static folder
+// static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-//index route
+// index route
 app.get('/', (req, res) => {
     res.redirect('/auth/login');
 });
 // routes
 app.use('/auth', require('./routes/login'));
 app.use('/sort', require('./routes/sorteo'));
-//app.use('/clients', require('./routes/clients'));
 
 const port = process.env.PORT || 3000;
 
