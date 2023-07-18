@@ -7,7 +7,7 @@ Nombre | Correo
 
 Framework de desarrollo para el Ejemplo
 ------
-* node js
+* Node js Express y Handlebars
 
 ******
 Herramientas AWS
@@ -19,18 +19,8 @@ Herramientas AWS
 * AWS Lambda
 
 ******
-/****////
-## Url's API Gateway
-URL | Descripción de Uso
----|---
-`https://tul6nj3s0e.execute-api.us-east-2.amazonaws.com/github-heroku` |  *API Gateway General*
-
-******
-
-## Endpoints de la API Gateway
-Endpoint | Descripción de Uso | Tipo
----|---|---
-`/ej-login` |  *Inicio de Sesión* | GET
-`alguna otra` | *Creación de algo* | GET
+## Descripción de proyecto
+Este proyecto se desarrolló con motivo de mostrar un ejemplo práctico en una conferencia brindada para la Escuela de Ciencias y Sistemas en la Universidad de San Carlos de Guatemala, la imagen correspondiente a la conferencia en la carpeta [*Circular Conferencia*](https://github.com/donis-rafael/ejemplo-heroku/tree/develop).
+Trata sobre el consumo de servicios tipo *serverless* en *`AWS`*, con el objetivo de hacer reconocimientos faciales (*rekognition*) y traducciones de texto (*translate*), utilizando funciones *`Lambda`* que se consumen a través de un *`API Gateway`*.
 
 ******
