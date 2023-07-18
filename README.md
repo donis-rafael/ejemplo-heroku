@@ -25,3 +25,5 @@ Este proyecto se desarrolló con motivo de mostrar un ejemplo práctico en una c
 Trata sobre el consumo de servicios tipo *serverless* en *`AWS`*, con el objetivo de hacer reconocimientos faciales (*rekognition*) y traducciones de texto (*translate*), utilizando funciones *`Lambda`* que se consumen a través de un *`API Gateway`*.
 
 ******
+
+El código fuente se encuentra en la rama **develop** del repositorio: [Github - Heroku](https://github.com/donis-rafael/ejemplo-heroku/tree/develop)
